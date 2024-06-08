@@ -29,7 +29,7 @@ const HomeScreen = () => {
     };
 
     const handleTasksScreen = () => {
-        navigation.navigate('TasksScreen');
+        navigation.navigate('Tareas', { usuario }); // Pasar el nombre de usuario como parámetro
     };
 
     if (videoPlaying) {
@@ -56,7 +56,7 @@ const HomeScreen = () => {
                 <Text style={styles.welcome}>¡Bienvenido! {usuario}</Text>
                 <TouchableOpacity
                     style={styles.button}
-                    onPress={() => navigation.navigate('Tareas')}
+                    onPress={handleTasksScreen}
                 >
                     <Text style={styles.buttonText}>Ir a Tareas</Text>
                 </TouchableOpacity>

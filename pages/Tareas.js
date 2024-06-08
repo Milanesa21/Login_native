@@ -1,35 +1,58 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList, Dimensions, ImageBackground } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
+import tasksData from './tasks.json'; // Importar datos del archivo tasks.json
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-const TasksScreen = ({ navigation }) => {
+const TasksScreen = ({ navigation, route }) => {
+    const { usuario } = route.params; // Recibir el nombre de usuario como parámetro
+
     const [tasks, setTasks] = useState([]);
     const [taskTitle, setTaskTitle] = useState('');
+    const [taskDescription, setTaskDescription] = useState('');
     const [editingTask, setEditingTask] = useState(null);
 
+    useEffect(() => {
+        loadTasks();
+    }, []);
+
+    const loadTasks = () => {
+        setTasks(tasksData);
+    };
+
     const handleAddTask = () => {
-        if (taskTitle) {
-            setTasks([...tasks, { id: Date.now(), title: taskTitle, completed: false }]);
+        if (taskTitle && taskDescription) {
+            const newTask = {
+                id: Date.now(),
+                title: taskTitle,
+                description: taskDescription,
+                author: usuario, // Utilizar el nombre de usuario como autor
+                date: new Date().toISOString().slice(0,10), // Tomar la fecha actual de creación
+                completed: false
+            };
+            setTasks([...tasks, newTask]);
             setTaskTitle('');
+            setTaskDescription('');
         }
     };
 
     const handleEditTask = (task) => {
         setTaskTitle(task.title);
+        setTaskDescription(task.description);
         setEditingTask(task);
     };
 
     const handleSaveTask = () => {
-        setTasks(tasks.map(task => task.id === editingTask.id ? { ...task, title: taskTitle } : task));
+        setTasks(tasks.map(task => task.id === editingTask.id ? { ...task, title: taskTitle, description: taskDescription } : task));
         setTaskTitle('');
+        setTaskDescription('');
         setEditingTask(null);
     };
 
     const handleViewTask = (task) => {
-        alert(`Tarea: ${task.title}`);
+        alert(`Título: ${task.title}\nDescripción: ${task.description}\nFecha de creación: ${task.date}\nAutor: ${task.author}`);
     };
 
     const handleCompleteTask = (task) => {
@@ -68,9 +91,15 @@ const TasksScreen = ({ navigation }) => {
                 <Text style={[styles.title, styles.borderText]}>Lista de Tareas</Text>
                 <TextInput
                     style={[styles.textInput, styles.borderText]}
-                    placeholder="Nueva tarea"
+                    placeholder="Título"
                     value={taskTitle}
                     onChangeText={setTaskTitle}
+                />
+                <TextInput
+                    style={[styles.textInput, styles.borderText]}
+                    placeholder="Descripción"
+                    value={taskDescription}
+                    onChangeText={setTaskDescription}
                 />
                 <TouchableOpacity
                     style={[styles.addButton, styles.borderText]}
@@ -174,6 +203,5 @@ const styles = StyleSheet.create({
         textShadowRadius: 2,
     },
 });
-
 
 export default TasksScreen;

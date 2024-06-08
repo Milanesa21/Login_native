@@ -1,0 +1,19 @@
+[
+    {
+      "id": 1,
+      "title": "Tarea 1",
+      "description": "Descripción de la tarea 1",
+      "author": "Nombre del autor 1",
+      "date": "2024-06-08",
+      "completed": false
+    },
+    {
+      "id": 2,
+      "title": "Tarea 2",
+      "description": "Descripción de la tarea 2",
+      "author": "Nombre del autor 2",
+      "date": "2024-06-09",
+      "completed": true
+    }
+  ]
+  
