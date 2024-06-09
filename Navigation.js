@@ -7,6 +7,7 @@ import HomeScreen from './pages/Home.js';
 import Register from './pages/Register.js';
 import InicioScreen from './pages/Inicio.js';
 import TasksScreen from './pages/Tareas.js';
+import ConfiguracionesScreen from './pages/Configuraciones.js';
 
 const Stack = createNativeStackNavigator();
 
@@ -36,6 +37,11 @@ function MyTabs() {
             <Stack.Screen 
                 name="Register"
                 component={Register}
+                options={{ headerShown: false }} 
+            />
+             <Stack.Screen 
+                name="Configuraciones"
+                component={ConfiguracionesScreen}
                 options={{ headerShown: false }} 
             />
         </Stack.Navigator>

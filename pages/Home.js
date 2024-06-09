@@ -29,7 +29,7 @@ const HomeScreen = () => {
     };
 
     const handleTasksScreen = () => {
-        navigation.navigate('Tareas', { usuario }); // Pasar el nombre de usuario como parámetro
+        navigation.navigate('Tareas', { usuario });
     };
 
     if (videoPlaying) {
@@ -48,7 +48,7 @@ const HomeScreen = () => {
             </View>
         );
     }
- 
+
     return (
         <ImageBackground source={require('../assets/c36fdf6f58dd9cc4c5912ad7e6030371.jpg')} style={styles.backgroundImage}>
             <View style={styles.contentContainer}>
@@ -65,6 +65,12 @@ const HomeScreen = () => {
                     onPress={handleBossFight}
                 >
                     <Text style={styles.buttonText}>Boss Fight</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={() => navigation.navigate('Configuraciones')}
+                >
+                    <Text style={styles.buttonText}>Configuraciones</Text>
                 </TouchableOpacity>
             </View>
         </ImageBackground>
@@ -91,7 +97,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#372919',
         borderRadius: 5,
         padding: 5,
-        marginTop: 20, // Adjust as needed
+        marginTop: 20,
     },
     button: {
         padding: 10,
@@ -128,17 +134,21 @@ const styles = StyleSheet.create({
         height: windowHeight / 2,
     },
     backButton: {
+        backgroundColor:'#800040',
+        borderRadius: 10,
         position: 'absolute',
-        top: 40,
-        right: 20,
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
-        padding: 10,
-        borderRadius: 20,
+        top: 20,
+        left: 20,
+        width: 40,
+        height: 40,
+        justifyContent: 'center',
+        alignItems: 'center',
+        zIndex: 999,
     },
     logo: {
-        width: 150, // Adjust width as needed
-        height: 150, // Adjust height as needed
-        marginBottom: 20, // Adjust as needed
+        width: 150,
+        height: 150,
+        marginBottom: 20,
     },
 });
 
