@@ -37,9 +37,9 @@ const ConfiguracionesScreen = () => {
                             style={styles.picker}
                             onValueChange={(itemValue) => setSelectedLanguage(itemValue)}
                         >
-                            <Picker.Item label="Español" value="es" />
-                            <Picker.Item label="Inglés" value="en" />
-                            <Picker.Item label="Francés" value="fr" />
+                            <Picker.Item label="Español" />
+                            <Picker.Item label="Inglés" />
+                            <Picker.Item label="Guarani" />
                         </Picker>
                     </View>
                 </View>
